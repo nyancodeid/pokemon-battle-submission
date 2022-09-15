@@ -1,0 +1,153 @@
+@property --pokemon-a-color {
+  syntax: "<color>";
+  initial-value: white;
+  inherits: false;
+}
+
+@property --pokemon-b-color {
+  syntax: "<color>";
+  initial-value: white;
+  inherits: false;
+}
+
+:root {
+  --border-color: black;
+}
+
+* {
+  font-family: Quicksand, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(
+      circle,
+      var(--pokemon-a-color) 0%,
+      var(--pokemon-b-color) 35%,
+      rgb(249, 249, 249) 100%
+    );
+  transition: --pokemon-a-color 1s ease-in-out, --pokemon-b-color 1s ease-in-out;
+}
+
+score-result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.score-wrapper {
+  display: flex;
+  padding: 6px;
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  background-color: antiquewhite;
+  gap: 6px;
+
+  .score-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+
+    &.score-pokemon-a {
+      background-color: var(--pokemon-a-color);
+      padding-left: 8px;
+    }
+
+    &.score-pokemon-b {
+      flex-direction: row-reverse;
+      background-color: var(--pokemon-b-color);
+      padding-right: 8px;
+    }
+
+    .score-item--name {
+      font-weight: bold;
+    }
+
+    .score-item--count {
+      font-family: monospace;
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0 16px;
+    }
+  }
+}
+
+.pokemons {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+
+  pokemon-card {
+    --card-radius: 16px;
+
+    border: 2px solid var(--border-color);
+    width: 384px;
+    background: white;
+
+    &#pokemon-a {
+      border-top-left-radius: var(--card-radius);
+      border-bottom-left-radius: var(--card-radius);
+      border-right: 0;
+    }
+
+    &#pokemon-b {
+      border-top-right-radius: var(--card-radius);
+      border-bottom-right-radius: var(--card-radius);
+    }
+  }
+
+  .refresh {
+    top: 2em;
+    line-height: 8px;
+    padding: 8px;
+    font-weight: bold;
+    border-radius: 100%;
+    background-color: #ebe2e2;
+    box-shadow: rgba(50, 50, 93, 25%) 0 50px 100px -20px, rgba(0, 0, 0, 30%) 0 30px 60px -30px;
+    border: 2px solid var(--border-color);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .pika {
+    top: 164px;
+    width: 84px;
+  }
+
+  .pika,
+  .refresh {
+    position: absolute;
+  }
+}
+
+footer {
+  margin-top: 1.5em;
+
+  p {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .pokemons pokemon-card {
+    width: 50%;
+  }
+
+  score-result {
+    margin-bottom: 8px;
+  }
+}
